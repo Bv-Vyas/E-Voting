@@ -73,7 +73,7 @@ function CandidateRegistration() {
       await tx.wait(); // Wait for transaction confirmation
 
       alert("Candidate Registered Successfully!");
-      navigate("/verification-pending");
+      navigate("/pending-verification");
     } catch (error) {
       console.error("Error registering candidate:", error);
       alert("Error registering candidate. Check console for details.");

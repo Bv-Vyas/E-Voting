@@ -5,7 +5,7 @@ import { CONTRACT_ADDRESS, CONTRACT_ABI } from "../config";
 
 function ResultCalculation() {
   const navigate = useNavigate();
-  const [winner, setWinner] = useState(null);
+  const [winners, setWinners] = useState([]);
   const [candidates, setCandidates] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -30,9 +30,9 @@ function ResultCalculation() {
         signer
       );
 
-      // Fetch the winner
-      const winnerData = await contract.getWinner();
-      if (winnerData[0] === "") {
+      // Fetch winners
+      const winnerData = await contract.getWinners();
+      if (winnerData[0].length === 0) {
         setError(
           "❌ No winner yet. Voting might not have started or no votes cast."
         );
@@ -40,11 +40,14 @@ function ResultCalculation() {
         return;
       }
 
-      setWinner({
-        name: winnerData[0],
-        party: winnerData[1],
+      // Store multiple winners
+      const winnerList = winnerData[0].map((name, index) => ({
+        name: name,
+        party: winnerData[1][index],
         voteCount: winnerData[2].toString(),
-      });
+      }));
+
+      setWinners(winnerList);
 
       // Fetch all candidates and sort them by votes
       const [names, ages, parties, wallets, approvals, votes] =
@@ -123,13 +126,21 @@ function ResultCalculation() {
         </div>
       )}
 
-      {winner && (
+      {winners.length > 0 && (
         <div className="glassmorphism text-center mb-4">
-          <h4 className="card-title">🏆 Winner: {winner.name}</h4>
-          <p className="card-text">
-            <strong>Party:</strong> {winner.party} <br />
-            <strong>Votes:</strong> {winner.voteCount}
-          </p>
+          <h4 className="card-title">
+            🏆 {winners.length > 1 ? "Winners" : "Winner"}:
+          </h4>
+          {winners.map((winner, index) => (
+            <div key={index}>
+              <p className="card-text">
+                <strong>Name:</strong> {winner.name} <br />
+                <strong>Party:</strong> {winner.party} <br />
+                <strong>Votes:</strong> {winner.voteCount}
+              </p>
+              {index < winners.length - 1 && <hr />}
+            </div>
+          ))}
         </div>
       )}
 
@@ -150,7 +161,9 @@ function ResultCalculation() {
                 <tr
                   key={index}
                   className={
-                    candidate.name === winner?.name ? "table-success" : ""
+                    winners.some((w) => w.name === candidate.name)
+                      ? "table-success"
+                      : ""
                   }
                 >
                   <td>{index + 1}</td>

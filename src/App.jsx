@@ -7,6 +7,7 @@ import AdminApproval from "./components/AdminApproval";
 import VoterLogin from "./components/VoterLogin";
 import VoterDashboard from "./components/VoterDashboard";
 import ResultCalculation from "./components/ResultCalculation";
+import PendingVerification from "./components/PendingVerification";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/admin-approval" element={<AdminApproval />} />
         <Route path="/login" element={<VoterLogin />} />
         <Route path="/dashboard" element={<VoterDashboard />} />
+        <Route path="/pending-verification" element={<PendingVerification />} />
         <Route path="/admin-approval" element={<AdminApproval />} />
         <Route path="/result-calculation" element={<ResultCalculation />} />
       </Routes>
