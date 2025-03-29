@@ -11,6 +11,8 @@ function VotingDashboard() {
   const [message, setMessage] = useState("");
   const [contract, setContract] = useState(null);
   const [userHasVoted, setUserHasVoted] = useState(false);
+  const [electionName, setElectionName] = useState("");
+  const [electionStatus, setElectionStatus] = useState("");
 
   useEffect(() => {
     initializeContract();
@@ -32,11 +34,29 @@ function VotingDashboard() {
       );
       setContract(votingContract);
 
+      fetchElectionDetails(votingContract);
       fetchCandidates(votingContract);
       checkUserVoteStatus(votingContract);
     } catch (error) {
       console.error("Error initializing contract:", error);
       setError("Failed to connect with the smart contract.");
+    }
+  };
+
+  const fetchElectionDetails = async (contractInstance) => {
+    try {
+      const [name, isActive, hasEnded] =
+        await contractInstance.getElectionStatus();
+      setElectionName(name);
+      setElectionStatus(
+        hasEnded
+          ? "🛑 Election Ended"
+          : isActive
+          ? "✅ Election Active"
+          : "⏳ Election Not Started"
+      );
+    } catch (error) {
+      console.error("Error fetching election details:", error);
     }
   };
 
@@ -97,13 +117,12 @@ function VotingDashboard() {
       setMessage("✅ Vote cast successfully!");
       setUserHasVoted(true);
 
-      // Redirect to Voter Dashboard after voting
       setTimeout(() => {
         navigate("/dashboard");
       }, 2000);
     } catch (error) {
       console.error("Error casting vote:", error);
-      setMessage("❌ Voting failed! You may have already voted.");
+      setMessage("❌ Voting failed! Election is Not Started Yet.");
     }
   };
 
@@ -118,6 +137,10 @@ function VotingDashboard() {
       }}
     >
       <h2 className="text-center text-white mb-4">Voting Dashboard</h2>
+      <div className="text-center text-white">
+        <h3 className="fw-bold">📢 {electionName || "No Election Created"}</h3>
+        <h5 className="fw-bold mt-2">{electionStatus}</h5>
+      </div>
 
       {error && <div className="alert alert-danger text-center">{error}</div>}
       {message && <div className="alert alert-info text-center">{message}</div>}

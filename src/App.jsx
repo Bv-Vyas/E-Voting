@@ -3,7 +3,7 @@ import Home from "./components/Home";
 import CandidateRegistration from "./components/CandidateRegistration";
 import VoterRegistration from "./components/VoterRegistration";
 import VotingDashboard from "./components/VotingDashboard";
-import AdminApproval from "./components/AdminApproval";
+import AdminPanel from "./components/AdminPanel";
 import VoterLogin from "./components/VoterLogin";
 import VoterDashboard from "./components/VoterDashboard";
 import ResultCalculation from "./components/ResultCalculation";
@@ -20,11 +20,11 @@ function App() {
         />
         <Route path="/voter-registration" element={<VoterRegistration />} />
         <Route path="/voting-dashboard" element={<VotingDashboard />} />
-        <Route path="/admin-approval" element={<AdminApproval />} />
+        <Route path="/admin-approval" element={<AdminPanel />} />
         <Route path="/login" element={<VoterLogin />} />
         <Route path="/dashboard" element={<VoterDashboard />} />
         <Route path="/pending-verification" element={<PendingVerification />} />
-        <Route path="/admin-approval" element={<AdminApproval />} />
+        <Route path="/admin-approval" element={<AdminPanel />} />
         <Route path="/result-calculation" element={<ResultCalculation />} />
       </Routes>
     </Router>

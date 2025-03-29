@@ -1,7 +1,7 @@
 // this is the config file for the voterLogin , VoterRegistration modules and voter Dashboard modules
 
 // Config file for the Contract Address And ABI for Voting Dashboard
-export const CONTRACT_ADDRESS = "0xe512A22850ab3Ad745d6401068Da068520D6d3a1"; // Replace with actual address
+export const CONTRACT_ADDRESS = "0x7190bCACB24c549fDaf22c737001D895f6B3E4b1"; // Replace with actual address
 
 export const CONTRACT_ABI = [
   {

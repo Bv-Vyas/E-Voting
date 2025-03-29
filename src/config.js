@@ -1,5 +1,5 @@
 // Config file for the Contract Address And ABI for Voting Dashboard
-export const CONTRACT_ADDRESS = "0xD125CedB82B7aA852ECe498E7bB3969087110945"; // Replace with actual address
+export const CONTRACT_ADDRESS = "0xcecf7aA79479317935A57FFD6b6a70b597683f44"; // Replace with actual address
 
 export const CONTRACT_ABI = [
   {
@@ -49,6 +49,37 @@ export const CONTRACT_ABI = [
       },
     ],
     name: "CandidateRegistered",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "string",
+        name: "name",
+        type: "string",
+      },
+    ],
+    name: "ElectionCreated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [],
+    name: "ElectionDeleted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [],
+    name: "ElectionEnded",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [],
+    name: "ElectionStarted",
     type: "event",
   },
   {
@@ -141,8 +172,58 @@ export const CONTRACT_ABI = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_name",
+        type: "string",
+      },
+    ],
+    name: "createElection",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "deleteAllCandidates",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "deleteElection",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "election",
+    outputs: [
+      {
+        internalType: "string",
+        name: "name",
+        type: "string",
+      },
+      {
+        internalType: "bool",
+        name: "isActive",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "hasEnded",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "endElection",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -180,6 +261,29 @@ export const CONTRACT_ABI = [
         internalType: "uint256[]",
         name: "",
         type: "uint256[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getElectionStatus",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
       },
     ],
     stateMutability: "view",
@@ -272,6 +376,13 @@ export const CONTRACT_ABI = [
       },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "startElection",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
