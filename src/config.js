@@ -1,5 +1,5 @@
 // Config file for the Contract Address And ABI for Voting Dashboard
-export const CONTRACT_ADDRESS = "0xcecf7aA79479317935A57FFD6b6a70b597683f44"; // Replace with actual address
+export const CONTRACT_ADDRESS = "0xA1b247F9f998A04a40A2698a3D62340aF3D8fED6"; // Replace with actual address
 
 export const CONTRACT_ABI = [
   {
@@ -226,6 +226,70 @@ export const CONTRACT_ABI = [
     name: "endElection",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getAllCandidates",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "string",
+            name: "name",
+            type: "string",
+          },
+          {
+            internalType: "uint256",
+            name: "age",
+            type: "uint256",
+          },
+          {
+            internalType: "string",
+            name: "party",
+            type: "string",
+          },
+          {
+            internalType: "address",
+            name: "candidateAddress",
+            type: "address",
+          },
+          {
+            internalType: "bool",
+            name: "approved",
+            type: "bool",
+          },
+          {
+            internalType: "uint256",
+            name: "votes",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct EVoting.Candidate[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_index",
+        type: "uint256",
+      },
+    ],
+    name: "getCandidateVotes",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {

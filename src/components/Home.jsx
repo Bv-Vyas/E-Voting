@@ -113,6 +113,12 @@ function Home() {
         >
           Result Calculation
         </button>
+        <button
+          className="btn btn-dark btn-lg custom-btn"
+          onClick={() => navigate("/analyze-election")}
+        >
+          Voting Analysis
+        </button>
         {!isLoggedIn && ( // Show Login button only if user is NOT logged in
           <button
             className="btn btn-info btn-lg custom-btn"
