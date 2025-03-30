@@ -1,5 +1,5 @@
 // Config file for the Contract Address And ABI for Voting Dashboard
-export const CONTRACT_ADDRESS = "0xA1b247F9f998A04a40A2698a3D62340aF3D8fED6"; // Replace with actual address
+export const CONTRACT_ADDRESS = "0xcB74e05833fE633f57A79F924Fca36e017b2CFFE"; // Replace with actual address
 
 export const CONTRACT_ABI = [
   {
